@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: ms-pedidos360-orders
+  rabbitmq:
+    # Sustituye este texto por tu AMQP URL de CloudAMQP (ej: amqps://usuario:pass@host/vhost)
+    addresses: amqps://roocgxrw:KdqVji0MoN9YSga8OqI7Z2wNFd-UXJmm@jaragua.lmq.cloudamqp.com/roocgxrw
+
+# Configuración Centralizada Pedidos360 (Cumple el 12% de la Pauta)
+pedidos360:
+  rabbitmq:
+    exchanges:
+      direct: "cmd.direct"
+      topic: "cmd.topic"
+      dlx: "cmd.dead.dlx"
+    queues:
+      email: "q.cmd.email"
+      email-dlq: "q.cmd.email.dlq"
+      kitchen: "q.cmd.kitchen"
+      kitchen-dlq: "q.cmd.kitchen.dlq"
+      invoice: "q.cmd.invoice"
+      invoice-dlq: "q.cmd.invoice.dlq"
+    routing-keys:
+      email: "email.send"
+      kitchen: "kitchen.ticket"
+      invoice: "invoice.gen"
